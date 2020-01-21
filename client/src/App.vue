@@ -11,7 +11,7 @@
       <v-btn icon>
         <v-icon>{{ mdiMagnify }}</v-icon>
       </v-btn>
-      <v-btn color="white" class="indigo--text">SIGN IN</v-btn>
+      <v-btn color="white" class="pink--text text--lighten-2">SIGN IN</v-btn>
     </v-app-bar>
 
     <v-content>
