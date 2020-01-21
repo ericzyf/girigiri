@@ -1,0 +1,12 @@
+{
+  "name": "girigiri-backend",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@feathersjs/express": "^4.5.0",
+    "@feathersjs/feathers": "^4.5.0",
+    "@feathersjs/socketio": "^4.5.0"
+  }
+}
