@@ -13,7 +13,11 @@
       </v-btn>
       <v-btn color="white" class="indigo--text">SIGN IN</v-btn>
     </v-app-bar>
+
     <v-content>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
     </v-content>
   </v-app>
 </template>
