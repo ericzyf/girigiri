@@ -1,18 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      dark
-      hide-on-scroll
-      color="pink lighten-2"
-    >
-      <v-toolbar-title class="font-weight-medium">ギリギリ</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>{{ mdiMagnify }}</v-icon>
-      </v-btn>
-      <v-btn color="white" class="pink--text text--lighten-2">SIGN IN</v-btn>
-    </v-app-bar>
+    <AppBar></AppBar>
 
     <v-content>
       <v-container fluid>
@@ -23,16 +11,14 @@
 </template>
 
 <script>
-import { mdiMagnify } from '@mdi/js'
+import AppBar from './components/AppBar.vue'
 
 export default {
-  name: 'App',
-
   components: {
+    AppBar
   },
 
   data: () => ({
-    mdiMagnify
-  }),
+  })
 }
 </script>
