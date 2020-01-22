@@ -5,8 +5,10 @@
     hide-on-scroll
     color="pink lighten-2"
   >
-    <v-toolbar-title id="logo">
-      <router-link to="/" class="white--text font-weight-medium">ギリギリ</router-link>
+    <v-toolbar-title>
+      <router-link to="/" active-class="no-text-decoration" exact-active-class="no-text-decoration">
+        <Logo class="white--text"></Logo>
+      </router-link>
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn icon>
@@ -19,9 +21,13 @@
 </template>
 
 <script>
+import Logo from './Logo.vue'
 import { mdiMagnify } from '@mdi/js'
 
 export default {
+  components: {
+    Logo
+  },
   data: () => ({
     mdiMagnify
   }),
@@ -29,7 +35,7 @@ export default {
 </script>
 
 <style>
-#logo a {
+.no-text-decoration {
   text-decoration: none;
 }
 </style>
