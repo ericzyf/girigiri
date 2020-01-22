@@ -15,7 +15,10 @@
       <v-icon>{{ mdiMagnify }}</v-icon>
     </v-btn>
     <router-link to="/signin">
-      <v-btn color="white" class="pink--text text--lighten-2">SIGN IN</v-btn>
+      <v-btn color="white" class="pink--text text--lighten-2">
+        <v-icon left>{{ mdiAccountCircle }}</v-icon>
+        SIGN IN
+      </v-btn>
     </router-link>
   </v-app-bar>
 </template>
@@ -23,13 +26,15 @@
 <script>
 import Logo from './Logo.vue'
 import { mdiMagnify } from '@mdi/js'
+import { mdiAccountCircle } from '@mdi/js'
 
 export default {
   components: {
     Logo
   },
   data: () => ({
-    mdiMagnify
+    mdiMagnify,
+    mdiAccountCircle
   }),
 }
 </script>
