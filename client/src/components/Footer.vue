@@ -6,14 +6,15 @@
     color="grey lighten-5"
     elevation="3"
   >
-    <span class="pl-2 font-weight-light">
+    <span class="pl-2 font-weight-light" style="width:33.333%">
       made with
       <v-icon color="#41b883">{{ mdiVuejs }}</v-icon>
     </span>
-    <v-spacer></v-spacer>
-    <span class="font-weight-light">
-      &copy; 2020 girigiri
-    </span>
+    <div style="width:33.333%">
+      <p class="font-weight-light text-center my-auto">
+        &copy; 2020 girigiri
+      </p>
+    </div>
     <v-spacer></v-spacer>
     <v-btn
       icon
