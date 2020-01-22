@@ -6,7 +6,11 @@
     color="pink lighten-2"
   >
     <v-toolbar-title>
-      <router-link to="/" active-class="no-text-decoration" exact-active-class="no-text-decoration">
+      <router-link
+        to="/"
+        active-class="no-text-decoration"
+        exact-active-class="no-text-decoration"
+      >
         <Logo class="white--text"></Logo>
       </router-link>
     </v-toolbar-title>
