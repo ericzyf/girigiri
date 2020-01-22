@@ -1,5 +1,8 @@
 <template>
-  <v-container style="height:100%">
+  <v-container
+    fluid
+    style="height:100%"
+  >
     <v-row
       style="height:100%"
     >
