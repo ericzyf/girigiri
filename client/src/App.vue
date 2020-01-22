@@ -3,9 +3,7 @@
     <AppBar></AppBar>
 
     <v-content>
-      <v-container fluid>
-        <router-view></router-view>
-      </v-container>
+      <router-view></router-view>
     </v-content>
 
     <Footer></Footer>
