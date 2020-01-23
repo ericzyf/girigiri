@@ -18,12 +18,14 @@
     <v-btn icon>
       <v-icon>{{ mdiMagnify }}</v-icon>
     </v-btn>
-    <router-link to="/signin">
-      <v-btn color="white" class="pink--text text--lighten-2">
-        <v-icon left>{{ mdiAccountCircle }}</v-icon>
-        SIGN IN
-      </v-btn>
-    </router-link>
+    <v-btn
+      color="white"
+      class="pink--text text--lighten-2"
+      to="/signin"
+    >
+      <v-icon left>{{ mdiAccountCircle }}</v-icon>
+      SIGN IN
+    </v-btn>
   </v-app-bar>
 </template>
 
