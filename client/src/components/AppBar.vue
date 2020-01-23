@@ -8,8 +8,7 @@
     <v-toolbar-title>
       <router-link
         to="/"
-        active-class="no-text-decoration"
-        exact-active-class="no-text-decoration"
+        style="text-decoration:none"
       >
         <Logo class="white--text"></Logo>
       </router-link>
@@ -44,9 +43,3 @@ export default {
   }),
 }
 </script>
-
-<style>
-.no-text-decoration {
-  text-decoration: none;
-}
-</style>

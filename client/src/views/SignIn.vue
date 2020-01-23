@@ -54,8 +54,7 @@
                     <div class="ml-4 grey--text text--lighten-1 overline">No account?</div>
                     <router-link
                       to="/signup"
-                      active-class="no-text-decoration"
-                      exact-active-class="no-text-decoration"
+                      style="text-decoration:none"
                     >
                       <span class="ml-4 font-weight-medium">
                         Create account
@@ -98,9 +97,5 @@ export default {
 .gradient-bg {
   background: rgb(238,174,202);
   background: linear-gradient(180deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
-}
-
-.no-text-decoration {
-  text-decoration: none;
 }
 </style>
