@@ -53,7 +53,7 @@
                   <v-col>
                     <div class="ml-4 grey--text text--lighten-1 overline">No account?</div>
                     <router-link
-                      to="/"
+                      to="/signup"
                       active-class="no-text-decoration"
                       exact-active-class="no-text-decoration"
                     >
