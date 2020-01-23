@@ -2,6 +2,7 @@
   <v-container
     fluid
     style="height:100%"
+    class="gradient-bg"
   >
     <v-row
       style="height:100%"
@@ -29,3 +30,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.gradient-bg {
+  background: rgb(238,174,202);
+  background: linear-gradient(180deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
+</style>
