@@ -33,6 +33,7 @@
             <v-list-item-content>
               <v-text-field
                 label="Password"
+                :append-icon="mdiEye"
                 counter
               ></v-text-field>
             </v-list-item-content>
@@ -85,11 +86,15 @@
 
 <script>
 import Logo from '../components/Logo.vue'
+import { mdiEye } from '@mdi/js'
 
 export default {
   components: {
     Logo
-  }
+  },
+  data: () => ({
+    mdiEye
+  })
 }
 </script>
 
