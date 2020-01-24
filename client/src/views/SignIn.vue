@@ -13,7 +13,7 @@
         height="500"
         outlined
       >
-        <v-list>
+        <v-list dense>
           <v-list-item class="mt-2">
             <v-list-item-content class="text-center">
               <Logo
@@ -36,6 +36,18 @@
                 :append-icon="mdiEye"
                 counter
               ></v-text-field>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item class="mx-auto" style="width:90%">
+            <v-list-item-content>
+              <router-link
+                to="/"
+                style="text-decoration:none"
+              >
+                <span class="font-weight-light">
+                  Forgot username/password?
+                </span>
+              </router-link>
             </v-list-item-content>
           </v-list-item>
           <v-list-item>
