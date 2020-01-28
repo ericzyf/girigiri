@@ -24,6 +24,7 @@
           <v-list-item class="mx-auto" style="width:90%">
             <v-list-item-content>
               <v-text-field
+                v-model="email"
                 label="Email"
                 clearable
               ></v-text-field>
@@ -32,6 +33,7 @@
           <v-list-item class="mx-auto" style="width:90%">
             <v-list-item-content>
               <v-text-field
+                v-model="username"
                 label="Username"
                 clearable
               ></v-text-field>
@@ -43,6 +45,7 @@
                 <v-row>
                   <v-col>
                     <v-text-field
+                      v-model="password"
                       label="Password"
                       :append-icon="mdiEye"
                       counter
@@ -50,6 +53,7 @@
                   </v-col>
                   <v-col>
                     <v-text-field
+                      v-model="password2"
                       label="Confirm Password"
                       :append-icon="mdiEye"
                       counter
@@ -86,7 +90,11 @@ export default {
     Logo
   },
   data: () => ({
-    mdiEye
+    mdiEye,
+    email: '',
+    username: '',
+    password: '',
+    password2: ''
   })
 }
 </script>
