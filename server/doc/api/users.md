@@ -22,7 +22,7 @@ Create a new user
 
 > GET /api/users/:uid
 
-Return the information of the user with the specified uid
+Get the information of the user with the specified uid
 
 > PUT /api/users/:uid
 
