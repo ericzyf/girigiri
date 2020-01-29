@@ -24,6 +24,7 @@
           <v-list-item class="mx-auto" style="width:90%">
             <v-list-item-content>
               <v-text-field
+                :prepend-icon="mdiAccount"
                 label="Username"
                 clearable
               ></v-text-field>
@@ -33,6 +34,7 @@
             <v-list-item-content>
               <v-text-field
                 label="Password"
+                :prepend-icon="mdiKey"
                 :append-icon="showPassword ? mdiEye : mdiEyeOff"
                 :type="showPassword ? 'text' : 'password'"
                 @click:append="showPassword = !showPassword"
@@ -100,7 +102,7 @@
 
 <script>
 import Logo from '../components/Logo.vue'
-import { mdiEye, mdiEyeOff } from '@mdi/js'
+import { mdiEye, mdiEyeOff, mdiAccount, mdiKey } from '@mdi/js'
 
 export default {
   components: {
@@ -109,6 +111,8 @@ export default {
   data: () => ({
     mdiEye,
     mdiEyeOff,
+    mdiAccount,
+    mdiKey,
     showPassword: false
   })
 }
