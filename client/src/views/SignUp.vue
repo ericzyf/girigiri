@@ -13,7 +13,7 @@
         height="500"
         outlined
       >
-        <v-list>
+        <v-list dense>
           <v-list-item class="mt-2">
             <v-list-item-content class="text-center">
               <Logo
@@ -37,6 +37,15 @@
                 label="Username"
                 clearable
               ></v-text-field>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item class="mx-auto" style="width:90%">
+            <v-list-item-content>
+              <v-select
+                v-model="gender"
+                :items="genders"
+                label="Gender"
+              ></v-select>
             </v-list-item-content>
           </v-list-item>
           <v-list-item class="mx-auto pa-0" style="width:90%">
@@ -104,7 +113,9 @@ export default {
     password: '',
     password2: '',
     showPassword: false,
-    showPassword2: false
+    showPassword2: false,
+    genders: ['Secret', 'Male', 'Female'],
+    gender: ''
   }),
   methods: {
     async signUp() {
@@ -112,10 +123,18 @@ export default {
         username: this.username,
         password: await StringHash.sha256(this.password),
         email: this.email,
-        gender: this.gender
+        gender: this.getGenderId(this.gender)
       }
       const res = await UsersService.post(userInfo)
       alert(JSON.stringify(res))
+    },
+    getGenderId(g) {
+      for (let i = 0; i < this.genders.length; ++i) {
+        if (this.genders[i] == g) {
+          return i
+        }
+      }
+      return 0
     }
   }
 }
