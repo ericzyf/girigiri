@@ -33,7 +33,9 @@
             <v-list-item-content>
               <v-text-field
                 label="Password"
-                :append-icon="mdiEye"
+                :append-icon="showPassword ? mdiEye : mdiEyeOff"
+                :type="showPassword ? 'text' : 'password'"
+                @click:append="showPassword = !showPassword"
                 counter
               ></v-text-field>
             </v-list-item-content>
@@ -98,14 +100,16 @@
 
 <script>
 import Logo from '../components/Logo.vue'
-import { mdiEye } from '@mdi/js'
+import { mdiEye, mdiEyeOff } from '@mdi/js'
 
 export default {
   components: {
     Logo
   },
   data: () => ({
-    mdiEye
+    mdiEye,
+    mdiEyeOff,
+    showPassword: false
   })
 }
 </script>
