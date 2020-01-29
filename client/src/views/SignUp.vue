@@ -90,6 +90,7 @@
 import Logo from '../components/Logo.vue'
 import { mdiEye, mdiEyeOff } from '@mdi/js'
 import UsersService from '../api/UsersService.js'
+import StringHash from '../utils/StringHash.js'
 
 export default {
   components: {
@@ -109,7 +110,7 @@ export default {
     async signUp() {
       let userInfo = {
         username: this.username,
-        password: this.password,
+        password: await StringHash.sha256(this.password),
         email: this.email,
         gender: this.gender
       }
