@@ -66,6 +66,7 @@
           <v-list-item class="mx-auto" style="width:90%">
             <v-list-item-content>
               <v-btn
+                @click="signUp()"
                 color="pink lighten-2"
                 depressed
                 dark
@@ -84,6 +85,7 @@
 <script>
 import Logo from '../components/Logo.vue'
 import { mdiEye } from '@mdi/js'
+import UsersService from '../api/UsersService.js'
 
 export default {
   components: {
@@ -94,8 +96,20 @@ export default {
     email: '',
     username: '',
     password: '',
-    password2: ''
-  })
+    password2: '',
+  }),
+  methods: {
+    async signUp() {
+      let userInfo = {
+        username: this.username,
+        password: this.password,
+        email: this.email,
+        gender: this.gender
+      }
+      const res = await UsersService.post(userInfo)
+      alert(JSON.stringify(res))
+    }
+  }
 }
 </script>
 
