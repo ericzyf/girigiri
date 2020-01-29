@@ -47,7 +47,9 @@
                     <v-text-field
                       v-model="password"
                       label="Password"
-                      :append-icon="mdiEye"
+                      :append-icon="showPassword ? mdiEye : mdiEyeOff"
+                      :type="showPassword ? 'text' : 'password'"
+                      @click:append="showPassword = !showPassword"
                       counter
                     ></v-text-field>
                   </v-col>
@@ -55,7 +57,9 @@
                     <v-text-field
                       v-model="password2"
                       label="Confirm Password"
-                      :append-icon="mdiEye"
+                      :append-icon="showPassword2 ? mdiEye : mdiEyeOff"
+                      :type="showPassword2 ? 'text' : 'password'"
+                      @click:append="showPassword2 = !showPassword2"
                       counter
                     ></v-text-field>
                   </v-col>
@@ -84,7 +88,7 @@
 
 <script>
 import Logo from '../components/Logo.vue'
-import { mdiEye } from '@mdi/js'
+import { mdiEye, mdiEyeOff } from '@mdi/js'
 import UsersService from '../api/UsersService.js'
 
 export default {
@@ -93,10 +97,13 @@ export default {
   },
   data: () => ({
     mdiEye,
+    mdiEyeOff,
     email: '',
     username: '',
     password: '',
     password2: '',
+    showPassword: false,
+    showPassword2: false
   }),
   methods: {
     async signUp() {
