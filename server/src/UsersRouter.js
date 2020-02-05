@@ -45,7 +45,11 @@ router.get('/:uid', (req, res) => {
     })
   } else {
     const uid = parseInt(req.params.uid)
-    if (UsersDb.store.has(uid)) {
+    if (Number.isNaN(uid)) {
+      res.status(400).send({
+        error: 'uid is NaN'
+      })
+    } else if (UsersDb.store.has(uid)) {
       res.status(200).send(UsersDb.store.get(uid))
     } else {
       res.status(404).send({
@@ -67,7 +71,11 @@ router.put('/:uid', (req, res) => {
     })
   } else {
     const uid = parseInt(req.params.uid)
-    if (UsersDb.store.has(uid)) {
+    if (Number.isNaN(uid)) {
+      res.status(400).send({
+        error: 'uid is NaN'
+      })
+    } else if (UsersDb.store.has(uid)) {
       UsersDb.store.set(uid, req.body)
       res.status(201).send(req.body)
     } else {
@@ -90,7 +98,11 @@ router.patch('/:uid', (req, res) => {
     })
   } else {
     const uid = parseInt(req.params.uid)
-    if (UsersDb.store.has(uid)) {
+    if (Number.isNaN(uid)) {
+      res.status(400).send({
+        error: 'uid is NaN'
+      })
+    } else if (UsersDb.store.has(uid)) {
       const patchedUser = Object.assign(UsersDb.store.get(uid), req.body)
       res.status(201).send(patchedUser)
     } else {
@@ -113,7 +125,11 @@ router.delete('/:uid', (req, res) => {
     })
   } else {
     const uid = parseInt(req.params.uid)
-    if (UsersDb.store.has(uid)) {
+    if (Number.isNaN(uid)) {
+      res.status(400).send({
+        error: 'uid is NaN'
+      })
+    } else if (UsersDb.store.has(uid)) {
       UsersDb.store.delete(uid)
       res.status(204).send()
     } else {
