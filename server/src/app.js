@@ -20,5 +20,7 @@ app.get('/api', (req, res) => res.send([
 
 // users api
 app.use('/api/users', require('./UsersRouter.js'))
+// auth api
+app.use('/api/auth', require('./AuthRouter.js'))
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
