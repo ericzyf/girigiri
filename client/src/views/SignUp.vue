@@ -130,7 +130,7 @@ export default {
     },
     getGenderId(g) {
       for (let i = 0; i < this.genders.length; ++i) {
-        if (this.genders[i] == g) {
+        if (this.genders[i] === g) {
           return i
         }
       }
