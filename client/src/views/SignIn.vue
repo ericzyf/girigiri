@@ -24,6 +24,7 @@
           <v-list-item class="mx-auto" style="width:90%">
             <v-list-item-content>
               <v-text-field
+                v-model="username"
                 :prepend-icon="mdiAccount"
                 label="Username"
                 clearable
@@ -33,6 +34,7 @@
           <v-list-item class="mx-auto" style="width:90%">
             <v-list-item-content>
               <v-text-field
+                v-model="password"
                 label="Password"
                 :prepend-icon="mdiKey"
                 :append-icon="showPassword ? mdiEye : mdiEyeOff"
@@ -81,6 +83,7 @@
                   <v-col>
                     <v-row justify="end">
                       <v-btn
+                        @click="signIn()"
                         color="pink lighten-2"
                         depressed
                         dark
@@ -102,6 +105,8 @@
 
 <script>
 import Logo from '../components/Logo.vue'
+import BasicAuth from '../utils/BasicAuth.js'
+import StringHash from '../utils/StringHash.js'
 import { mdiEye, mdiEyeOff, mdiAccount, mdiKey } from '@mdi/js'
 
 export default {
@@ -113,8 +118,20 @@ export default {
     mdiEyeOff,
     mdiAccount,
     mdiKey,
+    username: '',
+    password: '',
     showPassword: false
-  })
+  }),
+  methods: {
+    async signIn() {
+      const hashedPassword = await StringHash.sha256(this.password)
+      const basicAuthHeader = BasicAuth(this.username, hashedPassword)
+      localStorage.setItem('basicAuthHeader', basicAuthHeader)
+      alert(basicAuthHeader)
+      // go back one page
+      this.$router.go(-1)
+    }
+  }
 }
 </script>
 
