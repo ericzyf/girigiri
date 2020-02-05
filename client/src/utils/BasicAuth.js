@@ -1,1 +1,1 @@
-export default (name, pass) => window.btoa(`${name}:${pass}`)
+export default (name, pass) => 'Basic ' + window.btoa(`${name}:${pass}`)
