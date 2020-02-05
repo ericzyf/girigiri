@@ -1,9 +1,7 @@
 const auth = require('basic-auth')
 const express = require('express')
+const UsersDb = require('./db/Users.js')
 const router = express.Router()
-
-let USERS = new Map()
-let USERS_NEXTUID = 0
 
 // GET /api/users
 router.get('/', (req, res) => {
@@ -16,22 +14,22 @@ router.get('/', (req, res) => {
       error: 'Access denied'
     })
   } else {
-    res.status(200).send(Array.from(USERS.values()))
+    res.status(200).send(Array.from(UsersDb.store.values()))
   }
 })
 
 // POST /api/users
 router.post('/', (req, res) => {
   const user = {
-    uid: USERS_NEXTUID,
+    uid: UsersDb.getNextUid(),
     dateOfReg: new Date().toJSON(),
     username: req.body.username,
     password: req.body.password,
     email: req.body.email,
     gender: req.body.gender
   }
-  USERS.set(USERS_NEXTUID, user)
-  ++USERS_NEXTUID
+  UsersDb.store.set(UsersDb.getNextUid(), user)
+  UsersDb.incNextUid()
   res.status(201).send(user)
 })
 
@@ -47,8 +45,8 @@ router.get('/:uid', (req, res) => {
     })
   } else {
     const uid = parseInt(req.params.uid)
-    if (USERS.has(uid)) {
-      res.status(200).send(USERS.get(uid))
+    if (UsersDb.store.has(uid)) {
+      res.status(200).send(UsersDb.store.get(uid))
     } else {
       res.status(404).send({
         error: `GET /api/users/${uid}: user not found`
@@ -69,8 +67,8 @@ router.put('/:uid', (req, res) => {
     })
   } else {
     const uid = parseInt(req.params.uid)
-    if (USERS.has(uid)) {
-      USERS.set(uid, req.body)
+    if (UsersDb.store.has(uid)) {
+      UsersDb.store.set(uid, req.body)
       res.status(201).send(req.body)
     } else {
       res.status(404).send({
@@ -92,8 +90,8 @@ router.patch('/:uid', (req, res) => {
     })
   } else {
     const uid = parseInt(req.params.uid)
-    if (USERS.has(uid)) {
-      const patchedUser = Object.assign(USERS.get(uid), req.body)
+    if (UsersDb.store.has(uid)) {
+      const patchedUser = Object.assign(UsersDb.store.get(uid), req.body)
       res.status(201).send(patchedUser)
     } else {
       res.status(404).send({
@@ -115,8 +113,8 @@ router.delete('/:uid', (req, res) => {
     })
   } else {
     const uid = parseInt(req.params.uid)
-    if (USERS.has(uid)) {
-      USERS.delete(uid)
+    if (UsersDb.store.has(uid)) {
+      UsersDb.store.delete(uid)
       res.status(204).send()
     } else {
       res.status(404).send({
