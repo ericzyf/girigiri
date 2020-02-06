@@ -59,6 +59,7 @@
           <v-list-item>
             <v-list-item-content>
               <v-checkbox
+                v-model="rememberUser"
                 label="Remember me"
                 color="pink"
                 class="ml-6"
@@ -121,6 +122,7 @@ export default {
     mdiKey,
     username: '',
     password: '',
+    rememberUser: false,
     showPassword: false
   }),
   methods: {
