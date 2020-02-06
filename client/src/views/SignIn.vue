@@ -107,6 +107,7 @@
 import Logo from '../components/Logo.vue'
 import BasicAuth from '../utils/BasicAuth.js'
 import StringHash from '../utils/StringHash.js'
+import AuthService from '../api/AuthService.js'
 import { mdiEye, mdiEyeOff, mdiAccount, mdiKey } from '@mdi/js'
 
 export default {
@@ -126,10 +127,18 @@ export default {
     async signIn() {
       const hashedPassword = await StringHash.sha256(this.password)
       const basicAuthHeader = BasicAuth(this.username, hashedPassword)
-      localStorage.setItem('basicAuthHeader', basicAuthHeader)
-      alert(basicAuthHeader)
-      // go back one page
-      this.$router.go(-1)
+      const res = await AuthService.get({
+        'Authorization': basicAuthHeader
+      })
+      if (res.auth) {
+        alert('Login successfully.')
+        // store basic auth creds in localStorage
+        localStorage.setItem('basicAuthHeader', basicAuthHeader)
+        // go back one page
+        this.$router.go(-1)
+      } else {
+        alert('Wrong username or password.')
+      }
     }
   }
 }
