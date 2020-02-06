@@ -1,5 +1,5 @@
 import ApiConfig from './ApiConfig.js'
-const axios = require('axios')
+const axios = require('axios').default
 
 const URL = ApiConfig.basePath + '/users/'
 
