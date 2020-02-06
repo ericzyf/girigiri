@@ -12,13 +12,13 @@ router.get('/', (req, res) => {
     }
     return user.password === pass
   }
-  if (checkCreds(creds.name, creds.pass)) {
-    res.status(200).send({
-      auth: true
+  if (!creds || !checkCreds(creds.name, creds.pass)) {
+    res.send({
+      auth: false
     })
   } else {
-    res.status(401).send({
-      auth: false
+    res.send({
+      auth: true
     })
   }
 })
