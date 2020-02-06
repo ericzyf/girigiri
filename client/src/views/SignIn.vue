@@ -105,10 +105,10 @@
 
 <script>
 import Logo from '../components/Logo.vue'
+import { mdiEye, mdiEyeOff, mdiAccount, mdiKey } from '@mdi/js'
+import AuthService from '../api/AuthService.js'
 import BasicAuth from '../utils/BasicAuth.js'
 import StringHash from '../utils/StringHash.js'
-import AuthService from '../api/AuthService.js'
-import { mdiEye, mdiEyeOff, mdiAccount, mdiKey } from '@mdi/js'
 
 export default {
   components: {
