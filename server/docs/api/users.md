@@ -12,26 +12,43 @@ email      |string|email address
 gender     |number|0: unknown, 1: male, 2: female
 
 ## Methods
-`GET /api/users`
+```diff
+GET /api/users
++ Authorization header
+```
 
 Get the information of all users
 
-`POST /api/users`
+```diff
+POST /api/users
+```
 
 Create a new user
 
-`GET /api/users/:uid`
+```diff
+GET /api/users/:uid
++ Authorization header
+```
 
 Get the information of the user with the specified uid
 
-`PUT /api/users/:uid`
+```diff
+PUT /api/users/:uid
++ Authorization header
+```
 
 Replace the information of the user with the specified uid
 
-`PATCH /api/users/:uid`
+```diff
+PATCH /api/users/:uid
++ Authorization header
+```
 
 Update the information of the user with the specified uid
 
-`DELETE /api/users/:uid`
+```diff
+DELETE /api/users/:uid
++ Authorization header
+```
 
 Delete the information of the user with the specified uid
