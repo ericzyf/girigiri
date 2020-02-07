@@ -12,6 +12,12 @@ export default new Vuex.Store({
       username: '',
       email: '',
       gender: 0
+    },
+    gSnackbar: {
+      on: false,
+      color: undefined,
+      timeout: 6000,
+      text: ''
     }
   },
 
@@ -33,6 +39,13 @@ export default new Vuex.Store({
         username: '',
         email: '',
         gender: 0
+      }
+    },
+    setGlobalSnackbar(state, payload) {
+      for (const prop in state.gSnackbar) {
+        if (payload.hasOwnProperty(prop)) {
+          state.gSnackbar[prop] = payload[prop]
+        }
       }
     }
   }

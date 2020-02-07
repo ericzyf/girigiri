@@ -1,6 +1,20 @@
 <template>
   <v-app>
     <AppBar></AppBar>
+    <v-snackbar
+      bottom
+      v-model="gSnackbar.on"
+      :color="gSnackbar.color"
+      :timeout="gSnackbar.timeout"
+    >
+      {{ gSnackbar.text }}
+      <v-btn
+        text color="pink"
+        @click="gSnackbar.on = false"
+      >
+        CLOSE
+      </v-btn>
+    </v-snackbar>
 
     <v-content>
       <router-view></router-view>
@@ -19,8 +33,12 @@ export default {
     AppBar,
     Footer
   },
-
   data: () => ({
-  })
+  }),
+  computed: {
+    gSnackbar() {
+      return this.$store.state.gSnackbar
+    }
+  }
 }
 </script>
