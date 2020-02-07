@@ -133,6 +133,8 @@ export default {
         timeout: 2000,
         text: 'Your account has been created'
       })
+      // return to homepage
+      this.$router.push({ path: '/' })
     },
     getGenderId(g) {
       for (let i = 0; i < this.genders.length; ++i) {
