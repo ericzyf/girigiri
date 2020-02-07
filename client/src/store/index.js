@@ -26,11 +26,11 @@ export default new Vuex.Store({
       state.loggedIn = payload
     },
     setUserInfo(state, payload) {
-      state.userInfo.uid = payload.uid
-      state.userInfo.dateOfReg = payload.dateOfReg
-      state.userInfo.username = payload.username
-      state.userInfo.email = payload.email
-      state.userInfo.gender = payload.gender
+      for (const prop in state.userInfo) {
+        if (payload.hasOwnProperty(prop)) {
+          state.userInfo[prop] = payload[prop]
+        }
+      }
     },
     clearUserInfo(state) {
       state.userInfo = {
