@@ -134,8 +134,10 @@ export default {
       })
       if (res.auth) {
         alert('Login successfully.')
-        // store basic auth creds in localStorage
-        localStorage.setItem('basicAuthHeader', basicAuthHeader)
+        if (this.rememberUser) {
+          // store basic auth creds in localStorage
+          localStorage.setItem('basicAuthHeader', basicAuthHeader)
+        }
         // go back one page
         this.$router.go(-1)
       } else {
