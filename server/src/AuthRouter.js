@@ -4,21 +4,31 @@ const router = require('express').Router()
 
 router.get('/', (req, res) => {
   const creds = auth(req)
-  const checkCreds = (name, pass) => {
-    const UsersArray = Array.from(UsersDb.store.values())
-    const user = UsersArray.find(e => e.username === name)
-    if (typeof user === 'undefined') {
-      return false
+  const usersArray = Array.from(UsersDb.store.values())
+
+  const checkCreds = c => {
+    if (!c) {
+      // error parsing basic auth header
+      return undefined
     }
-    return user.password === pass
+    const u = usersArray.find(e => e.username === c.name)
+    if (typeof u === 'undefined') {
+      // username not found
+      return undefined
+    } else {
+      return (u.password === c.pass) ? u : undefined
+    }
   }
-  if (!creds || !checkCreds(creds.name, creds.pass)) {
+
+  const userInfo = checkCreds(creds)
+  if (typeof userInfo === 'undefined') {
     res.send({
       auth: false
     })
   } else {
     res.send({
-      auth: true
+      auth: true,
+      userInfo
     })
   }
 })
