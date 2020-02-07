@@ -153,7 +153,7 @@ export default {
         this.$store.commit('setGlobalSnackbar', {
           on: true,
           color: 'error',
-          timeout: 3000,
+          timeout: 2000,
           text: 'Wrong username or password'
         })
       }
