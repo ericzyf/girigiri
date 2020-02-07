@@ -141,7 +141,7 @@ export default {
           on: true,
           color: 'success',
           timeout: 1000,
-          text: 'Login successfully'
+          text: 'Sign in successfully'
         })
         if (this.rememberUser) {
           // store basic auth creds in localStorage
