@@ -133,7 +133,12 @@ export default {
         'Authorization': basicAuthHeader
       })
       if (res.auth) {
-        alert('Login successfully.')
+        this.$store.commit('setGlobalSnackbar', {
+          on: true,
+          color: 'success',
+          timeout: 1000,
+          text: 'Login successfully'
+        })
         if (this.rememberUser) {
           // store basic auth creds in localStorage
           localStorage.setItem('basicAuthHeader', basicAuthHeader)
@@ -141,7 +146,12 @@ export default {
         // go back one page
         this.$router.go(-1)
       } else {
-        alert('Wrong username or password.')
+        this.$store.commit('setGlobalSnackbar', {
+          on: true,
+          color: 'error',
+          timeout: 3000,
+          text: 'Wrong username or password'
+        })
       }
     }
   }
