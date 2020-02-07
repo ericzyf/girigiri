@@ -125,8 +125,14 @@ export default {
         email: this.email,
         gender: this.getGenderId(this.gender)
       }
-      const res = await UsersService.post(userInfo)
-      alert(JSON.stringify(res))
+      // const res = await UsersService.post(userInfo)
+      await UsersService.post(userInfo)
+      this.$store.commit('setGlobalSnackbar', {
+        on: true,
+        color: 'success',
+        timeout: 2000,
+        text: 'Your account has been created'
+      })
     },
     getGenderId(g) {
       for (let i = 0; i < this.genders.length; ++i) {
