@@ -159,6 +159,13 @@ export default {
         })
       }
     }
+  },
+
+  created() {
+    if (this.$store.state.loggedIn) {
+      // return to homepage
+      this.$router.push({ path: '/' })
+    }
   }
 }
 </script>
