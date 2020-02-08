@@ -2,12 +2,17 @@ import ApiConfig from './ApiConfig.js'
 const axios = require('axios').default
 
 const URL = ApiConfig.basePath + '/users/'
+// axios validateStatus function
+// reject only if the status code is >= 500
+const validateStatus = status => (status < 500)
 
 const UsersService = {
   // GET /api/users
   async get() {
     try {
-      const res = await axios.get(URL)
+      const res = await axios.get(URL, {
+        validateStatus
+      })
       return res.data
     } catch (e) {
       return {
@@ -19,7 +24,9 @@ const UsersService = {
   // POST /api/users
   async post(req) {
     try {
-      const res = await axios.post(URL, req)
+      const res = await axios.post(URL, req, {
+        validateStatus
+      })
       return res.data
     } catch (e) {
       return {
@@ -31,7 +38,9 @@ const UsersService = {
   // GET /api/users/:uid
   async getUid(uid) {
     try {
-      const res = await axios.get(`${URL}${uid}`)
+      const res = await axios.get(`${URL}${uid}`, {
+        validateStatus
+      })
       return res.data
     } catch (e) {
       return {
@@ -43,7 +52,9 @@ const UsersService = {
   // PUT /api/users/:uid
   async putUid(uid, req) {
     try {
-      const res = await axios.put(`${URL}${uid}`, req)
+      const res = await axios.put(`${URL}${uid}`, req, {
+        validateStatus
+      })
       return res.data
     } catch (e) {
       return {
@@ -55,7 +66,9 @@ const UsersService = {
   // PATCH /api/users/:uid
   async patchUid(uid, req) {
     try {
-      const res = await axios.patch(`${URL}${uid}`, req)
+      const res = await axios.patch(`${URL}${uid}`, req, {
+        validateStatus
+      })
       return res.data
     } catch (e) {
       return {
@@ -67,7 +80,9 @@ const UsersService = {
   // DELETE /api/users/:uid
   async deleteUid(uid) {
     try {
-      const res = await axios.delete(`${URL}${uid}`)
+      const res = await axios.delete(`${URL}${uid}`, {
+        validateStatus
+      })
       return res.data
     } catch (e) {
       return {
