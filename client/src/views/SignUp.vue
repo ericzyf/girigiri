@@ -99,12 +99,14 @@
 import Logo from '../components/Logo.vue'
 import { mdiEye, mdiEyeOff } from '@mdi/js'
 import UsersService from '../api/UsersService.js'
+import BasicAuth from '../utils/BasicAuth.js'
 import StringHash from '../utils/StringHash.js'
 
 export default {
   components: {
     Logo
   },
+
   data: () => ({
     mdiEye,
     mdiEyeOff,
@@ -117,6 +119,7 @@ export default {
     genders: ['Secret', 'Male', 'Female'],
     gender: ''
   }),
+
   methods: {
     async signUp() {
       let userInfo = {
@@ -125,16 +128,41 @@ export default {
         email: this.email,
         gender: this.getGenderId(this.gender)
       }
-      // const res = await UsersService.post(userInfo)
-      await UsersService.post(userInfo)
-      this.$store.commit('setGlobalSnackbar', {
-        on: true,
-        color: 'success',
-        timeout: 2000,
-        text: 'Your account has been created'
-      })
-      // return to homepage
-      this.$router.push({ path: '/' })
+      const res = await UsersService.post(userInfo)
+      if (res.hasOwnProperty('error')) {
+        // failed to create new user
+        const usedKey = res.usedKey
+        let text
+        if (usedKey.username && usedKey.email) {
+          text = 'The username and email are'
+        } else if (usedKey.username && !usedKey.email) {
+          text = 'The username is'
+        } else if (!usedKey.username && usedKey.email) {
+          text = 'The email is'
+        }
+        text += ' already in use'
+        this.$store.commit('setGlobalSnackbar', {
+          on: true,
+          color: 'error',
+          timeout: 2000,
+          text
+        })
+      } else {
+        // sign up successfully
+        // sign in with the new account
+        const basicAuthHeader = BasicAuth(res.username, res.password)
+        this.$store.commit('setLoginStatus', true)
+        this.$store.commit('setBasicAuthHeader', basicAuthHeader)
+        this.$store.commit('setUserInfo', res)
+        this.$store.commit('setGlobalSnackbar', {
+          on: true,
+          color: 'success',
+          timeout: 2000,
+          text: 'Your account has been created'
+        })
+        // return to homepage
+        this.$router.push({ path: '/' })
+      }
     },
     getGenderId(g) {
       for (let i = 0; i < this.genders.length; ++i) {
