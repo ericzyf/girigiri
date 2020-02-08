@@ -28,9 +28,23 @@ router.post('/', (req, res) => {
     email: req.body.email,
     gender: req.body.gender
   }
-  UsersDb.store.set(UsersDb.getNextUid(), user)
-  UsersDb.incNextUid()
-  res.status(201).send(user)
+  const usersArray = Array.from(UsersDb.store.values())
+  const u = usersArray.find(e => e.username === user.username || e.email === user.email)
+  if (typeof u === 'undefined') {
+    // username and email have not been used, create the new user
+    UsersDb.store.set(UsersDb.getNextUid(), user)
+    UsersDb.incNextUid()
+    res.status(201).send(user)
+  } else {
+    const usedKey = {
+      username: u.username === user.username,
+      email: u.email === user.email
+    }
+    res.status(403).send({
+      error: 'This username or email has already been used',
+      usedKey
+    })
+  }
 })
 
 // GET /api/users/:uid
