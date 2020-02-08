@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     loggedIn: false,
+    basicAuthHeader: '',
     userInfo: {
       uid: 0,
       dateOfReg: '',
@@ -24,6 +25,9 @@ export default new Vuex.Store({
   mutations: {
     setLoginStatus(state, payload) {
       state.loggedIn = payload
+    },
+    setBasicAuthHeader(state, payload) {
+      state.basicAuthHeader = payload
     },
     setUserInfo(state, payload) {
       for (const prop in state.userInfo) {
