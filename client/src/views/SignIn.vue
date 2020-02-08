@@ -115,6 +115,7 @@ export default {
   components: {
     Logo
   },
+
   data: () => ({
     mdiEye,
     mdiEyeOff,
@@ -125,6 +126,7 @@ export default {
     rememberUser: false,
     showPassword: false
   }),
+
   methods: {
     async signIn() {
       const hashedPassword = await StringHash.sha256(this.password)
@@ -135,6 +137,8 @@ export default {
       if (res.auth) {
         // store.state.loggedIn = true
         this.$store.commit('setLoginStatus', true)
+        // store basicAuthHeader in vuex
+        this.$store.commit('setBasicAuthHeader', basicAuthHeader)
         // store userInfo in vuex
         this.$store.commit('setUserInfo', res.userInfo)
         this.$store.commit('setGlobalSnackbar', {
