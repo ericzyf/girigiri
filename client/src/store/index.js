@@ -36,15 +36,6 @@ export default new Vuex.Store({
         }
       }
     },
-    clearUserInfo(state) {
-      state.userInfo = {
-        uid: 0,
-        dateOfReg: '',
-        username: '',
-        email: '',
-        gender: 0
-      }
-    },
     setGlobalSnackbar(state, payload) {
       for (const prop in state.gSnackbar) {
         if (payload.hasOwnProperty(prop)) {
