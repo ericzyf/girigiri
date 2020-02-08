@@ -17,14 +17,29 @@
     <v-btn icon>
       <v-icon>{{ mdiMagnify }}</v-icon>
     </v-btn>
-    <v-btn
-      color="white"
-      class="pink--text text--lighten-2"
-      to="/signin"
-    >
-      <v-icon left>{{ mdiAccountCircle }}</v-icon>
-      SIGN IN
-    </v-btn>
+
+    <template v-if="loggedIn">
+      <v-btn
+        fab color="primary"
+        width="40" height="40"
+      >
+        <v-avatar size="40">
+          <span class="white--text headline">
+            {{ userInfo.username }}
+          </span>
+        </v-avatar>
+      </v-btn>
+    </template>
+    <template v-else>
+      <v-btn
+        color="white"
+        class="pink--text text--lighten-2"
+        to="/signin"
+      >
+        <v-icon left>{{ mdiAccountCircle }}</v-icon>
+        SIGN IN
+      </v-btn>
+    </template>
   </v-app-bar>
 </template>
 
@@ -37,9 +52,19 @@ export default {
   components: {
     Logo
   },
+
   data: () => ({
     mdiMagnify,
     mdiAccountCircle
   }),
+
+  computed: {
+    loggedIn() {
+      return this.$store.state.loggedIn
+    },
+    userInfo() {
+      return this.$store.state.userInfo
+    }
+  }
 }
 </script>
