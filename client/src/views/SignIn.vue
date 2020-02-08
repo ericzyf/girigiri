@@ -135,11 +135,8 @@ export default {
         'Authorization': basicAuthHeader
       })
       if (res.auth) {
-        // store.state.loggedIn = true
         this.$store.commit('setLoginStatus', true)
-        // store basicAuthHeader in vuex
         this.$store.commit('setBasicAuthHeader', basicAuthHeader)
-        // store userInfo in vuex
         this.$store.commit('setUserInfo', res.userInfo)
         this.$store.commit('setGlobalSnackbar', {
           on: true,
