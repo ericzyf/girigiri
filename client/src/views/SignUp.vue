@@ -15,6 +15,7 @@
       >
         <v-progress-linear
           rounded v-model="progress"
+          :color="progress === 100 ? 'pink lighten-2' : 'primary'"
         ></v-progress-linear>
 
         <template v-if="pageNum === 1">
