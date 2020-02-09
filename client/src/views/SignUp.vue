@@ -13,83 +13,132 @@
         height="500"
         outlined
       >
-        <v-list dense>
-          <v-list-item class="mt-2">
-            <v-list-item-content class="text-center">
-              <Logo
-                class="pink--text text--lighten-2 headline"
-              ></Logo>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item class="mx-auto" style="width:90%">
-            <v-list-item-content>
-              <v-text-field
-                v-model="email"
-                label="Email"
-                clearable
-              ></v-text-field>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item class="mx-auto" style="width:90%">
-            <v-list-item-content>
-              <v-text-field
-                v-model="username"
-                label="Username"
-                clearable
-              ></v-text-field>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item class="mx-auto" style="width:90%">
-            <v-list-item-content>
-              <v-select
-                v-model="gender"
-                :items="genders"
-                label="Gender"
-              ></v-select>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item class="mx-auto pa-0" style="width:90%">
-            <v-list-item-content class="py-0">
-              <v-container class="py-0">
-                <v-row>
-                  <v-col>
-                    <v-text-field
-                      v-model="password"
-                      label="Password"
-                      :append-icon="showPassword ? mdiEye : mdiEyeOff"
-                      :type="showPassword ? 'text' : 'password'"
-                      @click:append="showPassword = !showPassword"
-                      counter
-                    ></v-text-field>
-                  </v-col>
-                  <v-col>
-                    <v-text-field
-                      v-model="password2"
-                      label="Confirm Password"
-                      :append-icon="showPassword2 ? mdiEye : mdiEyeOff"
-                      :type="showPassword2 ? 'text' : 'password'"
-                      @click:append="showPassword2 = !showPassword2"
-                      counter
-                    ></v-text-field>
-                  </v-col>
+        <v-progress-linear
+          rounded v-model="progressValue"
+        ></v-progress-linear>
+
+        <template v-if="pageNum === 1">
+          <v-list dense>
+            <v-list-item class="mt-2">
+              <v-list-item-content class="text-center">
+                <Logo
+                  class="pink--text text--lighten-2 headline"
+                ></Logo>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item class="mx-auto mt-5" style="width:90%">
+              <v-list-item-content>
+                <v-text-field
+                  v-model="email"
+                  outlined
+                  label="Email"
+                  clearable
+                  :prepend-inner-icon="mdiEmail"
+                ></v-text-field>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item class="mx-auto" style="width:90%">
+              <v-list-item-content>
+                <v-text-field
+                  v-model="username"
+                  outlined
+                  label="Username"
+                  clearable
+                  :prepend-inner-icon="mdiAccount"
+                ></v-text-field>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item class="mx-auto" style="width:90%">
+              <v-list-item-content>
+                <v-select
+                  v-model="gender"
+                  label="Gender"
+                  outlined
+                  :items="genders"
+                  :prepend-inner-icon="mdiHumanMaleFemale"
+                ></v-select>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-content>
+                <v-row justify="end">
+                  <v-btn
+                    @click="nextPage()"
+                    color="pink lighten-2"
+                    icon
+                    class="mr-12"
+                    x-large
+                  >
+                    <v-icon>{{ mdiArrowRight }}</v-icon>
+                  </v-btn>
                 </v-row>
-              </v-container>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item class="mx-auto" style="width:90%">
-            <v-list-item-content>
-              <v-btn
-                @click="signUp()"
-                color="pink lighten-2"
-                depressed
-                dark
-                class="mr-8"
-              >
-                SIGN UP
-              </v-btn>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </template>
+        <template v-else-if="pageNum === 2">
+          <v-list dense>
+            <v-list-item class="mt-2">
+              <v-list-item-content class="text-center">
+                <Logo
+                  class="pink--text text--lighten-2 headline"
+                ></Logo>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item class="mx-auto mt-12" style="width:90%">
+              <v-list-item-content>
+                <v-text-field
+                  v-model="password"
+                  label="Password"
+                  :append-icon="showPassword ? mdiEye : mdiEyeOff"
+                  :type="showPassword ? 'text' : 'password'"
+                  @click:append="showPassword = !showPassword"
+                  counter
+                  outlined
+                  :prepend-inner-icon="mdiLock"
+                ></v-text-field>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item class="mx-auto" style="width:90%">
+              <v-list-item-content>
+                <v-text-field
+                  v-model="password2"
+                  label="Confirm Password"
+                  :append-icon="showPassword2 ? mdiEye : mdiEyeOff"
+                  :type="showPassword2 ? 'text' : 'password'"
+                  @click:append="showPassword2 = !showPassword2"
+                  counter
+                  outlined
+                  :prepend-inner-icon="mdiShieldLock"
+                ></v-text-field>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item class="mx-auto mt-12 pt-7" style="width:90%">
+              <v-list-item-content>
+                <v-row justify="space-between">
+                  <v-btn
+                    @click="prevPage()"
+                    color="pink lighten-2"
+                    icon
+                    class="ml-4"
+                    x-large
+                  >
+                    <v-icon>{{ mdiArrowLeft }}</v-icon>
+                  </v-btn>
+                  <v-btn
+                    color="pink lighten-2"
+                    depressed
+                    dark
+                    class="mr-4 my-auto"
+                  >
+                    SIGN UP
+                  </v-btn>
+                </v-row>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </template>
+
       </v-card>
     </v-row>
   </v-container>
@@ -97,7 +146,17 @@
 
 <script>
 import Logo from '../components/Logo.vue'
-import { mdiEye, mdiEyeOff } from '@mdi/js'
+import {
+  mdiEye,
+  mdiEyeOff,
+  mdiEmail,
+  mdiAccount,
+  mdiHumanMaleFemale,
+  mdiLock,
+  mdiShieldLock,
+  mdiArrowRight,
+  mdiArrowLeft
+} from '@mdi/js'
 import UsersService from '../api/UsersService.js'
 import BasicAuth from '../utils/BasicAuth.js'
 import StringHash from '../utils/StringHash.js'
@@ -110,6 +169,13 @@ export default {
   data: () => ({
     mdiEye,
     mdiEyeOff,
+    mdiEmail,
+    mdiAccount,
+    mdiHumanMaleFemale,
+    mdiLock,
+    mdiShieldLock,
+    mdiArrowRight,
+    mdiArrowLeft,
     email: '',
     username: '',
     password: '',
@@ -117,10 +183,20 @@ export default {
     showPassword: false,
     showPassword2: false,
     genders: ['Secret', 'Male', 'Female'],
-    gender: ''
+    gender: '',
+    pageNum: 1,
+    progressValue: 0
   }),
 
   methods: {
+    nextPage() {
+      ++this.pageNum
+      this.progressValue = 50
+    },
+    prevPage() {
+      --this.pageNum
+      this.progressValue = 0
+    },
     async signUp() {
       let userInfo = {
         username: this.username,
