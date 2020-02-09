@@ -283,7 +283,7 @@ export default {
       return 0
     },
     isEmptyString(s) {
-      return !s || s.length === 0
+      return !s
     }
   }
 }
