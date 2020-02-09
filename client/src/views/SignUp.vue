@@ -72,7 +72,7 @@
                     </span>
                   </router-link>
                   <v-btn
-                    @click="nextPage()"
+                    @click="gotoNextPage()"
                     color="pink lighten-2"
                     icon
                     class="mr-12"
@@ -124,7 +124,7 @@
               <v-list-item-content>
                 <v-row justify="space-between">
                   <v-btn
-                    @click="prevPage()"
+                    @click="gotoPrevPage()"
                     color="pink lighten-2"
                     icon
                     class="ml-4"
@@ -218,10 +218,10 @@ export default {
   },
 
   methods: {
-    nextPage() {
+    gotoNextPage() {
       ++this.pageNum
     },
-    prevPage() {
+    gotoPrevPage() {
       --this.pageNum
     },
     async signUp() {
