@@ -106,7 +106,6 @@
                   @click:append="showPassword = !showPassword"
                   outlined
                   :prepend-inner-icon="mdiLock"
-                  :rules="[rules.required]"
                 ></v-text-field>
               </v-list-item-content>
             </v-list-item>
@@ -120,7 +119,6 @@
                   @click:append="showPassword2 = !showPassword2"
                   outlined
                   :prepend-inner-icon="mdiShieldLock"
-                  :rules="[rules.required]"
                 ></v-text-field>
               </v-list-item-content>
             </v-list-item>
