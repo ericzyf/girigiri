@@ -19,16 +19,50 @@
     </v-btn>
 
     <template v-if="loggedIn">
-      <v-btn
-        fab color="primary"
-        width="40" height="40"
-      >
-        <v-avatar size="40">
-          <span class="white--text headline">
-            {{ userInfo.username }}
-          </span>
-        </v-avatar>
+      <v-btn icon>
+        <v-icon>{{ mdiVideoPlus }}</v-icon>
       </v-btn>
+      <v-btn icon>
+        <v-icon>{{ mdiBell }}</v-icon>
+      </v-btn>
+      <v-menu
+        offset-y
+        open-on-hover
+      >
+        <template
+          v-slot:activator="{ on }"
+        >
+          <v-btn
+            fab color="primary"
+            width="40" height="40"
+            v-on="on"
+            class="ml-3"
+          >
+            <v-avatar size="40">
+              <span class="white--text headline">
+                {{ userInfo.username }}
+              </span>
+            </v-avatar>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item @click="true">
+            <v-list-item-title>
+              Menu1
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="true">
+            <v-list-item-title>
+              Menu2
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="true">
+            <v-list-item-title>
+              Menu3
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </template>
     <template v-else>
       <v-btn
@@ -47,6 +81,8 @@
 import Logo from './Logo.vue'
 import { mdiMagnify } from '@mdi/js'
 import { mdiAccountCircle } from '@mdi/js'
+import { mdiBell } from '@mdi/js'
+import { mdiVideoPlus } from '@mdi/js'
 
 export default {
   components: {
@@ -55,7 +91,9 @@ export default {
 
   data: () => ({
     mdiMagnify,
-    mdiAccountCircle
+    mdiAccountCircle,
+    mdiBell,
+    mdiVideoPlus
   }),
 
   computed: {
