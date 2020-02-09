@@ -14,7 +14,7 @@
         outlined
       >
         <v-progress-linear
-          rounded v-model="progressValue"
+          rounded v-model="progress"
         ></v-progress-linear>
 
         <template v-if="pageNum === 1">
@@ -102,7 +102,6 @@
                   :append-icon="showPassword ? mdiEye : mdiEyeOff"
                   :type="showPassword ? 'text' : 'password'"
                   @click:append="showPassword = !showPassword"
-                  counter
                   outlined
                   :prepend-inner-icon="mdiLock"
                 ></v-text-field>
@@ -116,7 +115,6 @@
                   :append-icon="showPassword2 ? mdiEye : mdiEyeOff"
                   :type="showPassword2 ? 'text' : 'password'"
                   @click:append="showPassword2 = !showPassword2"
-                  counter
                   outlined
                   :prepend-inner-icon="mdiShieldLock"
                 ></v-text-field>
@@ -193,18 +191,38 @@ export default {
     showPassword2: false,
     genders: ['Secret', 'Male', 'Female'],
     gender: '',
-    pageNum: 1,
-    progressValue: 0
+    pageNum: 1
   }),
+
+  computed: {
+    progress() {
+      const progressValues = [0, 20, 40, 60, 80, 100]
+      let count = 0
+      if (!this.isEmptyString(this.email)) {
+        ++count
+      }
+      if (!this.isEmptyString(this.username)) {
+        ++count
+      }
+      if (!this.isEmptyString(this.gender)) {
+        ++count
+      }
+      if (!this.isEmptyString(this.password)) {
+        ++count
+      }
+      if (!this.isEmptyString(this.password2)) {
+        ++count
+      }
+      return progressValues[count]
+    }
+  },
 
   methods: {
     nextPage() {
       ++this.pageNum
-      this.progressValue = 50
     },
     prevPage() {
       --this.pageNum
-      this.progressValue = 0
     },
     async signUp() {
       let userInfo = {
@@ -256,6 +274,9 @@ export default {
         }
       }
       return 0
+    },
+    isEmptyString(s) {
+      return !s || s.length === 0
     }
   }
 }
