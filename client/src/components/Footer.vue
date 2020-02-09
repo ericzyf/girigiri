@@ -8,7 +8,12 @@
   >
     <span class="pl-2 font-weight-light" style="width:33.333%">
       made with
-      <v-icon color="#41b883">{{ mdiVuejs }}</v-icon>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196.32 170.02"
+        width="19.6" height="17" style="vertical-align:middle"
+      >
+        <path fill="#42b883" d="M120.83 0L98.16 39.26 75.49 0H0l98.16 170.02L196.32 0h-75.49z"/>
+        <path fill="#35495e" d="M120.83 0L98.16 39.26 75.49 0H39.26l58.9 102.01L157.06 0h-36.23z"/>
+      </svg>
     </span>
     <div style="width:33.333%">
       <p class="font-weight-light text-center my-auto">
@@ -27,12 +32,10 @@
 </template>
 
 <script>
-import { mdiVuejs } from '@mdi/js'
 import { mdiGithubCircle } from '@mdi/js'
 
 export default {
   data: () => ({
-    mdiVuejs,
     mdiGithubCircle
   })
 }
