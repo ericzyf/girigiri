@@ -14,7 +14,17 @@
       </router-link>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn icon>
+    <template v-if="showSearchbar">
+      <v-text-field
+        v-model="searchKeywords"
+        placeholder="Search"
+        clearable
+        style="max-width:250px"
+      ></v-text-field>
+    </template>
+    <v-btn icon
+      @click="showSearchbar = !showSearchbar"
+    >
       <v-icon>{{ mdiMagnify }}</v-icon>
     </v-btn>
 
@@ -93,7 +103,9 @@ export default {
     mdiMagnify,
     mdiAccountCircle,
     mdiBell,
-    mdiVideoPlus
+    mdiVideoPlus,
+    showSearchbar: false,
+    searchKeywords: ''
   }),
 
   computed: {
