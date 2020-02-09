@@ -147,15 +147,15 @@
 <script>
 import Logo from '../components/Logo.vue'
 import {
+  mdiAccount,
+  mdiArrowLeft,
+  mdiArrowRight,
+  mdiEmail,
   mdiEye,
   mdiEyeOff,
-  mdiEmail,
-  mdiAccount,
   mdiHumanMaleFemale,
   mdiLock,
-  mdiShieldLock,
-  mdiArrowRight,
-  mdiArrowLeft
+  mdiShieldLock
 } from '@mdi/js'
 import UsersService from '../api/UsersService.js'
 import BasicAuth from '../utils/BasicAuth.js'
@@ -167,15 +167,15 @@ export default {
   },
 
   data: () => ({
+    mdiAccount,
+    mdiArrowLeft,
+    mdiArrowRight,
+    mdiEmail,
     mdiEye,
     mdiEyeOff,
-    mdiEmail,
-    mdiAccount,
     mdiHumanMaleFemale,
     mdiLock,
     mdiShieldLock,
-    mdiArrowRight,
-    mdiArrowLeft,
     email: '',
     username: '',
     password: '',
