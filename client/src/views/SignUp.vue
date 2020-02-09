@@ -61,7 +61,16 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-content>
-                <v-row justify="end">
+                <v-row justify="space-between">
+                  <router-link
+                    to="/signin"
+                    style="text-decoration:none"
+                    class="my-auto"
+                  >
+                    <span class="ml-10 font-weight-medium">
+                      Sign in instead
+                    </span>
+                  </router-link>
                   <v-btn
                     @click="nextPage()"
                     color="pink lighten-2"
