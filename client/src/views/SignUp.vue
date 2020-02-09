@@ -34,6 +34,7 @@
                   label="Email"
                   clearable
                   :prepend-inner-icon="mdiEmail"
+                  :rules="[rules.required]"
                 ></v-text-field>
               </v-list-item-content>
             </v-list-item>
@@ -45,6 +46,7 @@
                   label="Username"
                   clearable
                   :prepend-inner-icon="mdiAccount"
+                  :rules="[rules.required]"
                 ></v-text-field>
               </v-list-item-content>
             </v-list-item>
@@ -104,6 +106,7 @@
                   @click:append="showPassword = !showPassword"
                   outlined
                   :prepend-inner-icon="mdiLock"
+                  :rules="[rules.required]"
                 ></v-text-field>
               </v-list-item-content>
             </v-list-item>
@@ -117,6 +120,7 @@
                   @click:append="showPassword2 = !showPassword2"
                   outlined
                   :prepend-inner-icon="mdiShieldLock"
+                  :rules="[rules.required]"
                 ></v-text-field>
               </v-list-item-content>
             </v-list-item>
@@ -191,7 +195,10 @@ export default {
     showPassword2: false,
     genders: ['Secret', 'Male', 'Female'],
     gender: '',
-    pageNum: 1
+    pageNum: 1,
+    rules: {
+      required: v => !!v || 'Required'
+    }
   }),
 
   computed: {
