@@ -89,10 +89,12 @@
 
 <script>
 import Logo from './Logo.vue'
-import { mdiMagnify } from '@mdi/js'
-import { mdiAccountCircle } from '@mdi/js'
-import { mdiBell } from '@mdi/js'
-import { mdiVideoPlus } from '@mdi/js'
+import {
+  mdiAccountCircle,
+  mdiBell,
+  mdiMagnify,
+  mdiVideoPlus
+} from '@mdi/js'
 
 export default {
   components: {
@@ -100,9 +102,9 @@ export default {
   },
 
   data: () => ({
-    mdiMagnify,
     mdiAccountCircle,
     mdiBell,
+    mdiMagnify,
     mdiVideoPlus,
     showSearchbar: false,
     searchKeywords: ''
