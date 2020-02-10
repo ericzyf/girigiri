@@ -9,6 +9,14 @@ module.exports = {
 
   isUndefined(obj) {
     return typeof obj === 'undefined'
+  },
+
+  isUpperCase(c) {
+    return c === c.toUpperCase()
+  },
+
+  isLowerCase(c) {
+    return c === c.toLowerCase()
   }
 
 }
