@@ -224,7 +224,7 @@ export default {
   },
 
   methods: {
-    gotoNextPage() {
+    async gotoNextPage() {
       const isEmailEmpty = this.isEmptyString(this.email)
       const isUsernameEmpty = this.isEmptyString(this.username)
       if (isEmailEmpty || isUsernameEmpty) {
@@ -243,7 +243,35 @@ export default {
           text: 'Please fill in the required fields'
         })
       } else {
-        ++this.pageNum
+        // check if the email and username are available
+        const res = await UsersService.qsGet({
+          op: '0',
+          m: this.email,
+          n: this.username
+        })
+        if (res.avail) {
+          // email and username are available
+          // go to the next page
+          ++this.pageNum
+        } else {
+          // notify user which keys have been used
+          const usedKey = res.usedKey
+          let text
+          if (usedKey.username && usedKey.email) {
+            text = 'The username and email are'
+          } else if (usedKey.username && !usedKey.email) {
+            text = 'The username is'
+          } else if (!usedKey.username && usedKey.email) {
+            text = 'The email is'
+          }
+          text += ' already in use'
+          this.$store.commit('setGlobalSnackbar', {
+            on: true,
+            color: 'error',
+            timeout: 2000,
+            text
+          })
+        }
       }
     },
     gotoPrevPage() {
