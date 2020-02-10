@@ -225,7 +225,26 @@ export default {
 
   methods: {
     gotoNextPage() {
-      ++this.pageNum
+      const isEmailEmpty = this.isEmptyString(this.email)
+      const isUsernameEmpty = this.isEmptyString(this.username)
+      if (isEmailEmpty || isUsernameEmpty) {
+        // activate text field validation
+        if (isEmailEmpty) {
+          this.email = null
+        }
+        if (isUsernameEmpty) {
+          this.username = null
+        }
+        // notify user
+        this.$store.commit('setGlobalSnackbar', {
+          on: true,
+          color: 'info',
+          timeout: 2000,
+          text: 'Please fill in the required fields'
+        })
+      } else {
+        ++this.pageNum
+      }
     },
     gotoPrevPage() {
       --this.pageNum
