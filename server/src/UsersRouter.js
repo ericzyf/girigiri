@@ -22,7 +22,6 @@ router.get('/', (req, res) => {
   } else {
     // has query string
     const Q = req.query
-    console.log(Q)
     // query operations
     const OP = {
       MAIL_NAME_AVAIL: '0'  // (0).toString(36)
