@@ -1,20 +1,27 @@
 const auth = require('basic-auth')
 const express = require('express')
 const UsersDb = require('./db/Users.js')
+const _ = require('./utils/utils.js')
 const router = express.Router()
 
 // GET /api/users
 router.get('/', (req, res) => {
-  const creds = auth(req)
-  const checkCreds = (name, pass) => {
-    return true
-  }
-  if (!creds || !checkCreds(creds.name, creds.pass)) {
-    res.status(401).send({
-      error: 'Access denied'
-    })
+  if (_.isEmptyObject(req.query)) {
+    // no query string
+    const creds = auth(req)
+    const checkCreds = (name, pass) => {
+      return true
+    }
+    if (!creds || !checkCreds(creds.name, creds.pass)) {
+      res.status(401).send({
+        error: 'Access denied'
+      })
+    } else {
+      res.status(200).send(Array.from(UsersDb.store.values()))
+    }
   } else {
-    res.status(200).send(Array.from(UsersDb.store.values()))
+    // has query string
+    res.send(req.query)
   }
 })
 
