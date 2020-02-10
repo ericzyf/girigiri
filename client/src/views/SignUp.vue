@@ -123,7 +123,29 @@
                 ></v-text-field>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item class="mx-auto mt-12 pt-7" style="width:90%">
+            <v-list-item>
+              <v-list-item-content class="pa-0" style="width:90%">
+                <v-container class="pa-0">
+                  <v-row>
+                    <v-col class="py-0 pl-12 pr-0">
+                      <v-text-field
+                        label="Captcha"
+                        single-line
+                        style="width:70%"
+                        v-model="userCaptcha"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col class="pa-0 pr-8">
+                      <div
+                        v-html="captcha.data"
+                        @click="getCaptcha()"
+                      ></div>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item class="mx-auto" style="width:90%">
               <v-list-item-content class="pa-0 mt-4">
                 <v-row justify="space-between">
                   <v-btn
@@ -168,6 +190,7 @@ import {
   mdiLock,
   mdiShieldLock
 } from '@mdi/js'
+import CaptchaService from '../api/CaptchaService.js'
 import UsersService from '../api/UsersService.js'
 import BasicAuth from '../utils/BasicAuth.js'
 import StringHash from '../utils/StringHash.js'
@@ -198,7 +221,9 @@ export default {
     pageNum: 1,
     rules: {
       required: v => !!v || 'Required'
-    }
+    },
+    captcha: {},
+    userCaptcha: ''
   }),
 
   computed: {
@@ -254,6 +279,8 @@ export default {
           // email and username are available
           // go to the next page
           ++this.pageNum
+          // load captcha
+          await this.getCaptcha()
         } else {
           // notify user which keys have been used
           const usedKey = res.usedKey
@@ -279,26 +306,42 @@ export default {
       --this.pageNum
     },
     async signUp() {
-      let userInfo = {
-        username: this.username,
-        password: await StringHash.sha256(this.password),
-        email: this.email,
-        gender: this.getGenderId(this.gender)
+      if (this.userCaptcha === this.captcha.text) {
+        // user enters the correct captcha
+        let userInfo = {
+          username: this.username,
+          password: await StringHash.sha256(this.password),
+          email: this.email,
+          gender: this.getGenderId(this.gender)
+        }
+        await UsersService.post(userInfo)
+        // sign in with the new account
+        const basicAuthHeader = BasicAuth(userInfo.username, userInfo.password)
+        this.$store.commit('setLoginStatus', true)
+        this.$store.commit('setBasicAuthHeader', basicAuthHeader)
+        this.$store.commit('setUserInfo', userInfo)
+        this.$store.commit('setGlobalSnackbar', {
+          on: true,
+          color: 'success',
+          timeout: 2000,
+          text: 'Your account has been created'
+        })
+        // return to homepage
+        this.$router.push({ path: '/' })
+      } else {
+        // wrong captcha
+        // clear user input
+        this.userCaptcha = ''
+        // refresh captcha
+        await this.getCaptcha()
+        // notify user
+        this.$store.commit('setGlobalSnackbar', {
+          on: true,
+          color: 'error',
+          timeout: 2000,
+          text: 'Wrong captcha, please try again'
+        })
       }
-      await UsersService.post(userInfo)
-      // sign in with the new account
-      const basicAuthHeader = BasicAuth(userInfo.username, userInfo.password)
-      this.$store.commit('setLoginStatus', true)
-      this.$store.commit('setBasicAuthHeader', basicAuthHeader)
-      this.$store.commit('setUserInfo', userInfo)
-      this.$store.commit('setGlobalSnackbar', {
-        on: true,
-        color: 'success',
-        timeout: 2000,
-        text: 'Your account has been created'
-      })
-      // return to homepage
-      this.$router.push({ path: '/' })
     },
     getGenderId(g) {
       for (let i = 0; i < this.genders.length; ++i) {
@@ -310,6 +353,12 @@ export default {
     },
     isEmptyString(s) {
       return !s
+    },
+    async getCaptcha() {
+      this.captcha = await CaptchaService.post({
+        noise: 2,
+        color: true
+      })
     }
   }
 }

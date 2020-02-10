@@ -22,5 +22,7 @@ app.get('/api', (req, res) => res.send([
 app.use('/api/users', require('./UsersRouter.js'))
 // auth api
 app.use('/api/auth', require('./AuthRouter.js'))
+// captcha api
+app.use('/api/captcha', require('./CaptchaRouter.js'))
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
