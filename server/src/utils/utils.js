@@ -12,11 +12,11 @@ module.exports = {
   },
 
   isUpperCase(c) {
-    return c === c.toUpperCase()
+    return /^[A-Z]+$/.test(c)
   },
 
   isLowerCase(c) {
-    return c === c.toLowerCase()
+    return /^[a-z]+$/.test(c)
   }
 
 }
