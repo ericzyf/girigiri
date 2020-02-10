@@ -21,7 +21,38 @@ router.get('/', (req, res) => {
     }
   } else {
     // has query string
-    res.send(req.query)
+    const Q = req.query
+    console.log(Q)
+    // query operations
+    const OP = {
+      MAIL_NAME_AVAIL: '0'  // (0).toString(36)
+    }
+
+    switch (Q.op) {
+      case OP.MAIL_NAME_AVAIL:
+        /**
+         * check if the given email and username are already in use
+         * return true if they have not been used
+         *
+         * query string example:
+         * qs.stringify(
+         *   {
+         *      op: '0',
+         *      m: ${email},
+         *      n: ${username}
+         *   }
+         * )
+         */
+        const usersArray = Array.from(UsersDb.store.values())
+        const u = usersArray.find(e => e.username === Q.n || e.email === Q.m)
+        res.status(200).send(_.isUndefined(u))
+        break
+
+      default:
+        res.status(400).send({
+          error: 'Unknown query operation'
+        })
+    }
   }
 })
 
