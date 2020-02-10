@@ -22,19 +22,34 @@
         style="max-width:250px"
       ></v-text-field>
     </template>
-    <v-btn icon
-      @click="showSearchbar = !showSearchbar"
-    >
-      <v-icon>{{ mdiMagnify }}</v-icon>
-    </v-btn>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn icon v-on="on"
+          @click="showSearchbar = !showSearchbar"
+        >
+          <v-icon>{{ mdiMagnify }}</v-icon>
+        </v-btn>
+      </template>
+      <span>Search</span>
+    </v-tooltip>
 
     <template v-if="loggedIn">
-      <v-btn icon>
-        <v-icon>{{ mdiVideoPlus }}</v-icon>
-      </v-btn>
-      <v-btn icon>
-        <v-icon>{{ mdiBell }}</v-icon>
-      </v-btn>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>{{ mdiVideoPlus }}</v-icon>
+          </v-btn>
+        </template>
+        <span>Upload video</span>
+      </v-tooltip>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>{{ mdiBell }}</v-icon>
+          </v-btn>
+        </template>
+        <span>Notifications</span>
+      </v-tooltip>
       <v-menu
         offset-y
         open-on-hover
