@@ -17,6 +17,10 @@ module.exports = {
 
   isLowerCase(c) {
     return /^[a-z]+$/.test(c)
+  },
+
+  isNumber(c) {
+    return /^\d+$/.test(c)
   }
 
 }
