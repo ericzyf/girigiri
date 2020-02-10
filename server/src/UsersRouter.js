@@ -32,7 +32,6 @@ router.get('/', (req, res) => {
       case OP.MAIL_NAME_AVAIL:
         /**
          * check if the given email and username are already in use
-         * return true if they have not been used
          *
          * query string example:
          * qs.stringify(
@@ -45,7 +44,21 @@ router.get('/', (req, res) => {
          */
         const usersArray = Array.from(UsersDb.store.values())
         const u = usersArray.find(e => e.username === Q.n || e.email === Q.m)
-        res.status(200).send(_.isUndefined(u))
+        if (_.isUndefined(u)) {
+          // email and username are available
+          res.send({
+            avail: true
+          })
+        } else {
+          // email or/and username is/are already in use
+          res.send({
+            avail: false,
+            usedKey: {
+              email: u.email === Q.m,
+              username: u.username === Q.n
+            }
+          })
+        }
         break
 
       default:
