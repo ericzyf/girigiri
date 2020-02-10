@@ -9,8 +9,8 @@
     >
       <v-card
         class="ma-auto"
-        width="450"
-        height="500"
+        width="400"
+        height="450"
         outlined
       >
         <v-list dense>
@@ -68,9 +68,9 @@
           </v-list-item>
           <v-list-item>
             <v-list-item-content>
-              <v-container>
+              <v-container class="px-0 pt-2">
                 <v-row>
-                  <v-col>
+                  <v-col class="py-0 pl-5">
                     <div class="ml-4 grey--text text--lighten-1 overline">No account?</div>
                     <router-link
                       to="/signup"
@@ -81,7 +81,7 @@
                       </span>
                     </router-link>
                   </v-col>
-                  <v-col>
+                  <v-col class="py-0 pr-3">
                     <v-row justify="end">
                       <v-btn
                         @click="signIn()"

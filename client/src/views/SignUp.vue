@@ -9,8 +9,8 @@
     >
       <v-card
         class="ma-auto"
-        width="450"
-        height="500"
+        width="400"
+        height="450"
         outlined
       >
         <v-progress-linear
@@ -20,14 +20,14 @@
 
         <template v-if="pageNum === 1">
           <v-list dense>
-            <v-list-item class="mt-2">
+            <v-list-item class="mt-1">
               <v-list-item-content class="text-center">
                 <Logo
                   class="pink--text text--lighten-2 headline"
                 ></Logo>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item class="mx-auto mt-5" style="width:90%">
+            <v-list-item class="mx-auto mt-1" style="width:90%">
               <v-list-item-content>
                 <v-text-field
                   v-model="email"
@@ -63,7 +63,7 @@
               </v-list-item-content>
             </v-list-item>
             <v-list-item>
-              <v-list-item-content>
+              <v-list-item-content class="pa-0">
                 <v-row justify="space-between">
                   <router-link
                     to="/signin"
@@ -78,7 +78,7 @@
                     @click="gotoNextPage()"
                     color="pink lighten-2"
                     icon
-                    class="mr-12"
+                    class="mr-10"
                     x-large
                   >
                     <v-icon>{{ mdiArrowRight }}</v-icon>
@@ -90,14 +90,14 @@
         </template>
         <template v-else-if="pageNum === 2">
           <v-list dense>
-            <v-list-item class="mt-2">
+            <v-list-item class="mt-1">
               <v-list-item-content class="text-center">
                 <Logo
                   class="pink--text text--lighten-2 headline"
                 ></Logo>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item class="mx-auto mt-12" style="width:90%">
+            <v-list-item class="mx-auto mt-2" style="width:90%">
               <v-list-item-content>
                 <v-text-field
                   v-model="password"
@@ -124,7 +124,7 @@
               </v-list-item-content>
             </v-list-item>
             <v-list-item class="mx-auto mt-12 pt-7" style="width:90%">
-              <v-list-item-content>
+              <v-list-item-content class="pa-0 mt-4">
                 <v-row justify="space-between">
                   <v-btn
                     @click="gotoPrevPage()"
