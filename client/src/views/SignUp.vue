@@ -193,6 +193,7 @@ import {
 import CaptchaService from '../api/CaptchaService.js'
 import UsersService from '../api/UsersService.js'
 import BasicAuth from '../utils/BasicAuth.js'
+import HMAC from '../utils/HMAC.js'
 import StringHash from '../utils/StringHash.js'
 
 export default {
@@ -306,7 +307,22 @@ export default {
       --this.pageNum
     },
     async signUp() {
-      if (this.userCaptcha === this.captcha.text) {
+      // check if captcha is empty
+      if (!this.userCaptcha) {
+        this.$store.commit('setGlobalSnackbar', {
+          on: true,
+          color: 'error',
+          timeout: 2000,
+          text: 'Please enter the captcha'
+        })
+        return
+      }
+
+      const hmacSign = await HMAC.hs256(
+        this.transformLetterCase(this.userCaptcha, this.captcha.charType),
+        this.captcha.data
+      )
+      if (hmacSign === this.captcha.hmacSign) {
         // user enters the correct captcha
         let userInfo = {
           username: this.username,
@@ -359,6 +375,18 @@ export default {
         noise: 2,
         color: true
       })
+    },
+    transformLetterCase(str, charType) {
+      let c = Array.from(str)
+      const N = Math.min(str.length, charType.length)
+      for (let i = 0; i < N; ++i) {
+        if (charType[i] === 'U') {
+          c[i] = c[i].toUpperCase()
+        } else if (charType[i] === 'L') {
+          c[i] = c[i].toLowerCase()
+        }
+      }
+      return c.join('')
     }
   }
 }
