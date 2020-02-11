@@ -371,10 +371,21 @@ export default {
       return !s
     },
     async getCaptcha() {
-      this.captcha = await CaptchaService.post({
+      const res = await CaptchaService.post({
         noise: 2,
         color: true
       })
+      if (res.hasOwnProperty('error')) {
+        // too many requests
+        this.$store.commit('setGlobalSnackbar', {
+          on: true,
+          color: 'info',
+          timeout: 1000,
+          text: 'Too many requests'
+        })
+      } else {
+        this.captcha = res
+      }
     },
     transformLetterCase(str, charType) {
       let c = Array.from(str)

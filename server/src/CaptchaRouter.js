@@ -1,5 +1,6 @@
 const crypto = require('crypto')
 const router = require('express').Router()
+const rateLimit = require('express-rate-limit')
 const svgCaptcha = require('svg-captcha')
 const _ = require('./utils/utils.js')
 
@@ -14,7 +15,10 @@ function charType(c) {
   return '?'
 }
 
-router.post('/', (req, res) => {
+router.post('/', rateLimit({
+  windowMs: 60000,  // 1 minute
+  max: 10
+}), (req, res) => {
   const C = svgCaptcha.create(req.body)
   const hmac = crypto.createHmac('sha256', C.text)
   const hmacSign = hmac.update(C.data).digest('hex')
