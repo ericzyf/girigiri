@@ -81,9 +81,12 @@
               Menu2
             </v-list-item-title>
           </v-list-item>
-          <v-list-item @click="true">
+          <v-list-item @click="signOut()">
             <v-list-item-title>
-              Menu3
+              <v-icon color="red">{{ mdiExitToApp }}</v-icon>
+              <span class="red--text font-weight-medium">
+                Sign out
+              </span>
             </v-list-item-title>
           </v-list-item>
         </v-list>
@@ -107,6 +110,7 @@ import Logo from './Logo.vue'
 import {
   mdiAccountCircle,
   mdiBell,
+  mdiExitToApp,
   mdiMagnify,
   mdiVideoPlus
 } from '@mdi/js'
@@ -119,6 +123,7 @@ export default {
   data: () => ({
     mdiAccountCircle,
     mdiBell,
+    mdiExitToApp,
     mdiMagnify,
     mdiVideoPlus,
     showSearchbar: false,
@@ -131,6 +136,29 @@ export default {
     },
     userInfo() {
       return this.$store.state.userInfo
+    }
+  },
+
+  methods: {
+    signOut() {
+      this.$store.commit('setLoginStatus', false)
+      this.$store.commit('setBasicAuthHeader', '')
+      this.$store.commit('setUserInfo', {
+        uid: 0,
+        dateOfReg: '',
+        username: '',
+        email: '',
+        gender: 0
+      })
+      this.$store.commit('setGlobalSnackbar', {
+        on: true,
+        color: 'info',
+        timeout: 2000,
+        text: 'Sign out successfully'
+      })
+
+      // remove basicAuthHeader stored in localStorage
+      localStorage.removeItem('basicAuthHeader')
     }
   }
 }
