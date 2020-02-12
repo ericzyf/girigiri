@@ -71,11 +71,13 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item @click="true">
+          <v-list-item>
             <v-list-item-title>
-              Menu1
+              <span class="font-weight-light subtitle-2">Signed in as</span>
+              <span>&nbsp;{{ userInfo.username }}</span>
             </v-list-item-title>
           </v-list-item>
+          <v-divider></v-divider>
           <v-list-item @click="true">
             <v-list-item-title>
               Menu2
