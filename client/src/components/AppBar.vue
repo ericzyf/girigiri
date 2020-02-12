@@ -80,7 +80,18 @@
           <v-divider></v-divider>
           <v-list-item @click="true">
             <v-list-item-title>
-              Menu2
+              <v-icon>{{ mdiVideoAccount }}</v-icon>
+              <span>
+                My channel
+              </span>
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="true">
+            <v-list-item-title>
+              <v-icon>{{ mdiAccountCog }}</v-icon>
+              <span>
+                User profile
+              </span>
             </v-list-item-title>
           </v-list-item>
           <v-list-item @click="signOut()">
@@ -111,9 +122,11 @@
 import Logo from './Logo.vue'
 import {
   mdiAccountCircle,
+  mdiAccountCog,
   mdiBell,
   mdiExitToApp,
   mdiMagnify,
+  mdiVideoAccount,
   mdiVideoPlus
 } from '@mdi/js'
 
@@ -124,9 +137,11 @@ export default {
 
   data: () => ({
     mdiAccountCircle,
+    mdiAccountCog,
     mdiBell,
     mdiExitToApp,
     mdiMagnify,
+    mdiVideoAccount,
     mdiVideoPlus,
     showSearchbar: false,
     searchKeywords: ''
