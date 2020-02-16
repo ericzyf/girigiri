@@ -86,11 +86,11 @@
               </span>
             </v-list-item-title>
           </v-list-item>
-          <v-list-item @click="true">
+          <v-list-item @click="gotoSettings()">
             <v-list-item-title>
               <v-icon>{{ mdiAccountCog }}</v-icon>
               <span>
-                User profile
+                Settings
               </span>
             </v-list-item-title>
           </v-list-item>
@@ -157,6 +157,9 @@ export default {
   },
 
   methods: {
+    gotoSettings() {
+      this.$router.push({ path: '/settings' })
+    },
     signOut() {
       this.$store.commit('setLoginStatus', false)
       this.$store.commit('setBasicAuthHeader', '')
